@@ -7,282 +7,380 @@ class SinhVien
 {
 	protected:
 		string mssv;
-		string hoten;
-		int ngay, thang, nam;
-		int khoa;
-		string diachi;
-		long long hocphi;
+		string HoTen;
+		int Ngay, Thang, Nam;
+		int Khoa;
+		string DiaChi;
+		long long HocPhi;
 	public:
-		virtual void nhap();
-		virtual void xuat();
-		virtual void tinhhocphi()=0;
-		long long gethocphi();
+		SinhVien();
+		~SinhVien();
+		virtual void Nhap();
+		virtual void Xuat();
+		virtual void TinhHocPhi()=0;
+		float getHocPhi();
+		string getTen();
+		string getmssv(); 
+		string getDiaChi(); 
 };
-
-void SinhVien::nhap()
+SinhVien::SinhVien()
 {
-	cout << "Nhap ma so sinh vien: ";
+} 
+SinhVien::~SinhVien()
+{
+} 
+void SinhVien::Nhap()
+{
+	cout << "\t\t\t\tNhap ma so sinh vien: ";
 	cin.ignore(256, '\n');
 	getline(cin, mssv);
-	cout << "Nhap ho ten sinh vien: ";
+	cout << "\t\t\t\tNhap ho ten sinh vien: ";
 	fflush(stdin);
-	getline(cin, hoten);
-	cout<<"Nhap nam sinh: ";
-	cin >> nam;
-	if(nam < 0){
-		do{
-			cout << "\nDinh dang nam khong dung.";
-			cout << "\nNhap lai nam: ";
-			cin >> nam;
-		}while (nam < 0);
+	getline(cin, HoTen);
+	cout<<"\t\t\t\tNhap nam sinh: ";
+	cin >> Nam;
+	if(Nam < 0){
+		do
+		{
+			cout << "\n\t\t\t\tDinh dang nam khong dung.";
+			cout << "\n\t\t\t\tNhap lai nam: ";
+			cin >> Nam;
+		}
+		while (Nam < 0);
 	}
-	if (nam % 4 == 0 ){
+	if (Nam % 4 == 0 )
+	{
 		cout << "Nhap thang: ";
-		cin >> thang;
-		if (thang <= 0 || thang >12){
-			do{
-				cout << "\nDinh dang thang khong dung.";
-				cout << "\nNhap lai thang: ";
-				cin >> thang;
-			}while (thang <= 0 || thang >12);
+		cin >> Thang;
+		if (Thang <= 0 || Thang >12)
+		{
+			do
+			{
+				cout << "\n\t\t\t\tDinh dang thang khong dung.";
+				cout << "\n\t\t\t\tNhap lai thang: ";
+				cin >> Thang;
+			}
+			while (Thang <= 0 || Thang >12);
 		}
-		if(thang < 8){
-			if(thang % 2 != 0){
+		if(Thang < 8)
+		{
+			if(Thang % 2 != 0)
+			{
 				cout << "Nhap ngay: ";
-				cin >> ngay;
-				if (ngay <= 0 || ngay >=32){
-					do{
-						cout << "\nDinh dang ngay khong dung.";
-						cout << "\nNhap lai ngay: ";
-						cin >> ngay;	
-					}while(ngay <= 0 || ngay >=32);
+				cin >> Ngay;
+				if (Ngay <= 0 || Ngay >=32)
+				{
+					do
+					{
+						cout << "\n\t\t\t\tDinh dang ngay khong dung.";
+						cout << "\n\t\t\t\tNhap lai ngay: ";
+						cin >> Ngay;	
+					}
+					while(Ngay <= 0 || Ngay >=32);
 				}
 			}
 		}
-		if(thang < 8){
-			if(thang % 2 == 0 && thang != 2){
+		if(Thang < 8)
+		{
+			if(Thang % 2 == 0 && Thang != 2)
+			{
 				cout << "Nhap ngay: ";
-				cin >> ngay;
-				if(ngay <= 0 || ngay >=31){
-					do{
-						cout << "\nDinh dang ngay khong dung.";
-						cout << "\nNhap lai ngay: ";
-						cin >> ngay;
-					}while(ngay <= 0 || ngay >=31);
+				cin >> Ngay;
+				if(Ngay <= 0 || Ngay >=31)
+				{
+					do
+					{
+						cout << "\n\t\t\t\tDinh dang ngay khong dung.";
+						cout << "\n\t\t\t\tNhap lai ngay: ";
+						cin >> Ngay;
+					}
+					while(Ngay <= 0 || Ngay >=31);
 				}
 			}
 		}
-		if(thang == 2){
-			cout << "Nhap ngay: ";
-			cin >> ngay;
-			if(ngay <= 0 || ngay >=30){
-				do{
-					cout << "\nDinh dang ngay khong dung.";
-					cout << "\nNhap lai ngay: ";
-					cin >> ngay;
-				}while(ngay <= 0 || ngay >=30);
+		if(Thang == 2)
+		{
+			cout << "\t\t\t\tNhap ngay: ";
+			cin >> Ngay;
+			if(Ngay <= 0 || Ngay >=30)
+			{
+				do
+				{
+					cout << "\n\t\t\t\tDinh dang ngay khong dung.";
+					cout << "\n\t\t\t\tNhap lai ngay: ";
+					cin >> Ngay;
+				}
+				while(Ngay <= 0 || Ngay >=30);
 			}
 		}
-		if(thang > 8){
-			if(thang % 2 != 0){
-				cout << "Nhap ngay: ";
-				cin >> ngay;
-				if(ngay <= 0 || ngay >=31){
-					do{
-						cout << "\nDinh dang ngay khong dung.";
-						cout << "\nNhap lai ngay: ";
-						cin >> ngay;
-					}while(ngay <= 0 || ngay >=31);
+		if(Thang > 8)
+		{
+			if(Thang % 2 != 0)
+			{
+				cout << "\t\t\t\tNhap ngay: ";
+				cin >> Ngay;
+				if(Ngay <= 0 || Ngay >=31)
+				{
+					do
+					{
+						cout << "\n\t\t\t\tDinh dang ngay khong dung.";
+						cout << "\n\t\t\t\tNhap lai ngay: ";
+						cin >> Ngay;
+					}
+					while(Ngay <= 0 || Ngay >=31);
 				}
 			}
 		}
-		if(thang > 8){
-			if(thang % 2 == 0){
-				cout << "Nhap ngay: ";
-				cin >> ngay;
-				if(ngay <= 0 || ngay >=32){
-					do{
-						cout << "\nDinh dang ngay khong dung.";
-						cout << "\nNhap lai ngay: ";
-						cin >> ngay;	
-					}while(ngay <= 0 || ngay >=32);
+		if(Thang > 8)
+		{
+			if(Thang % 2 == 0)
+			{
+				cout << "\t\t\t\tNhap ngay: ";
+				cin >> Ngay;
+				if(Ngay <= 0 || Ngay >=32)
+				{
+					do
+					{
+						cout << "\n\t\t\t\tDinh dang ngay khong dung.";
+						cout << "\n\t\t\t\tNhap lai ngay: ";
+						cin >> Ngay;	
+					}
+					while(Ngay <= 0 || Ngay >=32);
 				}
 			}
 		}
-		if(thang == 8){
-			cout << "Nhap ngay: ";
-				cin >> ngay;
-				if(ngay <= 0 || ngay >=32){
-					cout << "\nDinh dang ngay khong dung.";
-					cout << "\nNhap lai ngay: ";
-					cin >> ngay;	
-				}while(ngay <= 0 || ngay >=32);
+		if(Thang == 8)
+		{
+			cout << "\t\t\t\tNhap ngay: ";
+				cin >> Ngay;
+				if(Ngay <= 0 || Ngay >=32)
+				{
+					cout << "\n\t\t\t\tDinh dang ngay khong dung.";
+					cout << "\n\t\t\t\tNhap lai ngay: ";
+					cin >> Ngay;	
+				}
+				while(Ngay <= 0 || Ngay >=32);
 		}
 	}
-	if(nam % 4 != 0){
-		cout << "Nhap thang: ";
-		cin >> thang;
-		if(thang <= 0 || thang >12){
-			do{
-				cout << "\nDinh dang thang khong dung.";
-				cout << "\nNhap lai thang: ";
-				cin >> thang;
-			}while(thang <= 0 || thang >12);
+	if(Nam % 4 != 0)
+	{
+		cout << "\t\t\t\tNhap thang: ";
+		cin >> Thang;
+		if(Thang <= 0 || Thang >12)
+		{
+			do
+			{
+				cout << "\n\t\t\t\tDinh dang thang khong dung.";
+				cout << "\n\t\t\t\tNhap lai thang: ";
+				cin >> Thang;
+			}while(Thang <= 0 || Thang >12);
 		}
-		if(thang < 8){
-			if(thang % 2 != 0){
-				cout << "Nhap ngay: ";
-				cin >> ngay;
-				if(ngay <= 0 || ngay >=32){
-					do{
-						cout << "\nDinh dang ngay khong dung.";
-						cout << "\nNhap lai ngay: ";
-						cin >> ngay;	
-					}while(ngay <= 0 || ngay >=32);
+		if(Thang < 8)
+		{
+			if(Thang % 2 != 0){
+				cout << "\t\t\t\tNhap ngay: ";
+				cin >> Ngay;
+				if(Ngay <= 0 || Ngay >=32)
+				{
+					do
+					{
+						cout << "\n\t\t\t\tDinh dang ngay khong dung.";
+						cout << "\n\t\t\t\tNhap lai ngay: ";
+						cin >> Ngay;	
+					}while(Ngay <= 0 || Ngay >=32);
 				}
 			}
 		}
-		if(thang < 8){
-			if(thang % 2 == 0 && thang != 2){
-				cout << "Nhap ngay: ";
-				cin >> ngay;
-				if(ngay <= 0 || ngay >=31){
-					do{
-						cout << "\nDinh dang ngay khong dung.";
-						cout << "\nNhap lai ngay: ";
-						cin >> ngay;
-					}while(ngay <= 0 || ngay >=31);
+		if(Thang < 8)
+		{
+			if(Thang % 2 == 0 && Thang != 2)
+			{
+				cout << "\t\t\t\tNhap ngay: ";
+				cin >> Ngay;
+				if(Ngay <= 0 || Ngay >=31)
+				{
+					do
+					{
+						cout << "\n\t\t\t\tDinh dang ngay khong dung.";
+						cout << "\n\t\t\t\tNhap lai ngay: ";
+						cin >> Ngay;
+					}
+					while(Ngay <= 0 || Ngay >=31);
 				}
 			}
 		}
-		if(thang == 2){
-			cout << "Nhap ngay: ";
-			cin >> ngay;
-			if(ngay <= 0 || ngay >=29){
-				do{
-					cout << "\nDinh dang ngay khong dung.";
-					cout << "\nNhap lai ngay: ";
-					cin >> ngay;
-				}while(ngay <= 0 || ngay >=29);
+		if(Thang == 2)
+		{
+			cout << "\t\t\t\tNhap ngay: ";
+			cin >> Ngay;
+			if(Ngay <= 0 || Ngay >=29)
+			{
+				do
+				{
+					cout << "\n\t\t\t\tDinh dang ngay khong dung.";
+					cout << "\n\t\t\t\tNhap lai ngay: ";
+					cin >> Ngay;
+				}
+				while(Ngay <= 0 || Ngay >=29);
 			}
 		}
-		if(thang > 8){
-			if(thang % 2 != 0){
-				cout << "Nhap ngay: ";
-				cin >> ngay;
-				if(ngay <= 0 || ngay >=31){
+		if(Thang > 8)
+		{
+			if(Thang % 2 != 0)
+			{
+				cout << "\t\t\t\tNhap ngay: ";
+				cin >> Ngay;
+				if(Ngay <= 0 || Ngay >=31)
+				{
 					do{
-						cout << "\nDinh dang ngay khong dung.";
-						cout << "\nNhap lai ngay: ";
-						cin >> ngay;
-					}while(ngay <= 0 || ngay >=31);
+						cout << "\n\t\t\t\tDinh dang ngay khong dung.";
+						cout << "\n\t\t\t\tNhap lai ngay: ";
+						cin >> Ngay;
+					}
+					while(Ngay <= 0 || Ngay >=31);
 				}
 			}
 		}
-		if(thang > 8){
-			if(thang % 2 == 0){
-				cout << "Nhap ngay: ";
-				cin >> ngay;
-				if(ngay <= 0 || ngay >=32){
+		if(Thang > 8)
+		{
+			if(Thang % 2 == 0)
+			{
+				cout << "\t\t\t\tNhap ngay: ";
+				cin >> Ngay;
+				if(Ngay <= 0 || Ngay >=32)
+				{
 					do{ 
-						cout << "\nDinh dang ngay khong dung.";
-						cout << "\nNhap lai ngay: ";
-						cin >> ngay;	
-					}while(ngay <= 0 || ngay >=32);
+						cout << "\n\t\t\t\tDinh dang ngay khong dung.";
+						cout << "\n\t\t\t\tNhap lai ngay: ";
+						cin >> Ngay;	
+					}
+					while(Ngay <= 0 || Ngay >=32);
 				}
 			}
 		}
-		if(thang == 8){
-			cout << "Nhap ngay: ";
-				cin >> ngay;
-				if(ngay <= 0 || ngay >=32){
-					do{
-						cout << "\nDinh dang ngay khong dung.";
-						cout << "\nNhap lai ngay: ";
-						cin >> ngay;	
-					}while(ngay <= 0 || ngay >=32);
+		if(Thang == 8)
+		{
+			cout << "\t\t\t\tNhap ngay: ";
+				cin >> Ngay;
+				if(Ngay <= 0 || Ngay >=32)
+				{
+					do
+					{
+						cout << "\n\t\t\t\tDinh dang ngay khong dung.";
+						cout << "\n\t\t\t\tNhap lai ngay: ";
+						cin >> Ngay;	
+					}
+					while(Ngay <= 0 || Ngay >=32);
 				}
 		}
 	}
-	cout << "\nNhap khoa: ";
-	cin >> khoa;
-	cout << "Nhap dia chi sinh vien: ";
+	cout << "\t\t\t\tNhap khoa: ";
+	cin >> Khoa;
+	cout << "\t\t\t\tNhap dia chi sinh vien: ";
 	fflush(stdin);
-	getline(cin, diachi);
+	getline(cin, DiaChi);
 }
 
-void SinhVien::xuat()
+void SinhVien::Xuat()
 {
-	cout << "Ma so sinh vien: " << mssv << endl;
-	cout << "Ho ten sinh vien: "<< hoten << endl;
-	cout << "Ngay/thang/nam sinh: "<< ngay << "/" << thang << "/" << nam <<endl;
-	cout << "Khoa: " << khoa << endl;
+	cout << "\n\t\t\t\tMa so sinh vien: " << mssv << endl;
+	cout << "\t\t\t\tHo ten sinh vien: "<< HoTen << endl;
+	cout << "\t\t\t\tNgay/thang/nam sinh: "<< Ngay << "/" << Thang << "/" << Nam <<endl;
+	cout << "\t\t\t\tKhoa: " << Khoa << endl;
+	cout << "\t\t\t\tDia chi : "<< DiaChi <<endl; 
 }
 
-long long SinhVien::gethocphi()
+float SinhVien::getHocPhi()
 {
-	return hocphi;
+	return HocPhi;
 }
-
+string SinhVien::getTen()
+{
+	return HoTen; 
+} 
+string SinhVien::getmssv()
+{
+	return mssv; 
+}
+string SinhVien::getDiaChi()
+{
+	return DiaChi; 
+} 
 //tao class con SinhVienKiThuat ke thua class cha SinhVien
 class SinhVienKiThuat : public SinhVien
 {
 	private:
-		int sotinchi;
+		int SoTinChi;
 	public:
-		void nhap();
-		void xuat();
-		void tinhhocphi();
+		SinhVienKiThuat();
+		~SinhVienKiThuat();
+		void Nhap();
+		void Xuat();
+		void TinhHocPhi();
 };
-
-void SinhVienKiThuat::nhap()
+SinhVienKiThuat::SinhVienKiThuat():SinhVien()
 {
-	SinhVien::nhap();
-	cout << "Nhap so tin chi: ";
-	cin >> sotinchi;
+	SoTinChi=0; 
+} 
+SinhVienKiThuat::~SinhVienKiThuat()
+{
+}
+void SinhVienKiThuat::Nhap()
+{
+	SinhVien::Nhap();
+	cout << "\t\t\t\tNhap so tin chi: ";
+	cin >> SoTinChi;
 }
 
-void SinhVienKiThuat::xuat()
+void SinhVienKiThuat::Xuat()
 {
-	SinhVien::xuat();
-	cout << "So tin chi: " << sotinchi << endl;
-	this->tinhhocphi();
-	cout << "Hoc phi: " << hocphi << "vnd" << endl; 
+	SinhVien::Xuat();
+	cout << "\t\t\t\tSo tin chi: " << SoTinChi << endl;
+	this->TinhHocPhi();
+	cout << "\t\t\t\tHoc phi: " << HocPhi << " vnd"<< endl; 
 }
 
-void SinhVienKiThuat::tinhhocphi()
+void SinhVienKiThuat::TinhHocPhi()
 {
-	hocphi = sotinchi * 330400;
+	this->HocPhi = this->SoTinChi*330400;
 }
 
 class SinhVienKinhTe : public SinhVien
 {	
 	private:
-		int sotinchi;
+		int SoTinChi;
 	public:
-		void nhap();
-		void xuat();
-		void tinhhocphi();
+		SinhVienKinhTe();
+		~SinhVienKinhTe();
+		void Nhap();
+		void Xuat();
+		void TinhHocPhi();
 };
-
-void SinhVienKinhTe::nhap()
+SinhVienKinhTe::SinhVienKinhTe():SinhVien()
 {
-	SinhVien::nhap();
-	cout << "Nhap so tin chi: ";
-	cin >> sotinchi;
+	SoTinChi=0; 
+} 
+SinhVienKinhTe::~SinhVienKinhTe()
+{
+}
+void SinhVienKinhTe::Nhap()
+{
+	SinhVien::Nhap();
+	cout << "\t\t\t\tNhap so tin chi: ";
+	cin >> SoTinChi;
 }
 
-void SinhVienKinhTe::xuat()
+void SinhVienKinhTe::Xuat()
 {
-	SinhVien::xuat();
-	cout << "So tin chi: "<<sotinchi<<endl;
-	this->tinhhocphi();
-	cout << "Hoc phi: " << hocphi << "vnd" << endl;
+	SinhVien::Xuat();
+	cout << "\t\t\t\tSo tin chi: "<<SoTinChi<<endl;
+	this->TinhHocPhi();
+	cout << "\t\t\t\tHoc phi: " << HocPhi << " vnd" << endl;
 }
 
-void SinhVienKinhTe::tinhhocphi()
+void SinhVienKinhTe::TinhHocPhi()
 {
-	this->hocphi = this->sotinchi * 275200;
+	this->HocPhi = this->SoTinChi*275200;
 }
 
 class QuanLySinhVien
@@ -294,44 +392,51 @@ class QuanLySinhVien
         void XuatDS();
         void SapXepTangDan();
         void SapXepGiamDan();
-        void Maxhocphi();
-        void Minhocphi();
-        void Tonghocphi();
-        void timkiemten();
+        void MaxHocPhi();
+        void MinHocPhi();
+        void TongHocPhi();
+        void TimTen();
+		void TimMaSoSinhVien();
+		void TimSinhVienTheoDiaChi(); 
 };
 
 void QuanLySinhVien :: NhapDS()
 {
 	SinhVien *sv;
-    int n, m;
-    cout << "Nhap so luong sinh vien ky thuat: ";
-    cin >> n;
-    for (int i = 0; i < n; i++){
-        sv = new SinhVienKiThuat;
-        cout<<"Nhap sinh vien thu "<<i+1<<endl;
-        sv->nhap();
-        SV.push_back(sv);
-        cout<<endl;
-    }
-    cout << "Nhap so luong sinh vien kinh te: ";
-    cin >> m;
-    for (int i = 0; i < m; i++){
-        sv = new SinhVienKinhTe;
-        cout<<"Nhap sinh vien thu "<<i+1<<endl;
-		sv->nhap();
-        SV.push_back(sv);
-        cout << endl;
-    }
+        int n, m;
+        cout << "\n\t\t\t\tNhap so luong sinh vien ky thuat: ";
+        cin >> n;
+        for (int i = 0; i < n; i++)
+		{
+            sv = new SinhVienKiThuat;
+            cout<<"\n\t\t\t\tNhap sinh vien thu "<<i+1<<endl;
+            sv->Nhap();
+            SV.push_back(sv);
+            cout<<endl;
+        }
+        cout << "\t\t\t\tNhap so luong sinh vien kinh te: ";
+        cin >> m;
+        for (int i = 0; i < m; i++)
+		{
+            sv = new SinhVienKinhTe;
+            cout << "\n\t\t\t\tNhap sinh vien thu "<<i+1<<endl;
+			sv->Nhap();
+            SV.push_back(sv);
+            cout << endl;
+        }
 }
 
 void QuanLySinhVien :: XuatDS()
 {
-	if(SV.size()==0){
-		cout << "\n\n\t\t\t\t\t********** Danh sach rong **********" << endl;
+	if(SV.size()==0)
+	{
+		cout << "\n\t\t\t\t\t********** Danh sach rong **********" << endl;
 	}
-	else{
-		for(int i = 0; i < this -> SV.size(); i++){
-        	this->SV.at(i)->xuat();
+	else
+	{
+		for(int i = 0; i < this -> SV.size(); i++)
+		{
+        	this->SV.at(i)->Xuat();
         	cout << endl;
 		}
 	}
@@ -340,12 +445,16 @@ void QuanLySinhVien :: XuatDS()
 void QuanLySinhVien :: SapXepTangDan()
 {
 	if(SV.size()==0){
-		cout << "\n\n\t\t\t\t\t********** Danh sach rong **********" << endl;
+		cout << "\n\t\t\t\t\t********** Danh sach rong *********" << endl;
 	}
-	else{
-		for (int i=0; i < SV.size()-1; i++){
-        for (int j = i + 1; j < SV.size(); j++){
-            if(SV.at(i)->gethocphi() > SV.at(j)->gethocphi()){
+	else
+	{
+		for (int i=0; i < SV.size()-1; i++)
+		{
+        for (int j = i + 1; j < SV.size(); j++)
+		{
+            if(SV.at(i)->getHocPhi() > SV.at(j)->getHocPhi())
+			{
                 SinhVien *t= SV.at(i);
                 SV.at(i)=SV.at(j);
                 SV.at(j)=t;
@@ -358,13 +467,18 @@ void QuanLySinhVien :: SapXepTangDan()
 
 void QuanLySinhVien :: SapXepGiamDan()
 {
-	if(SV.size()==0){
-		cout << "\n\n\t\t\t\t\t********** Danh sach rong **********" << endl;
+	if(SV.size()==0)
+	{
+		cout << "\n\t\t\t\t\t********** Danh sach rong **********" << endl;
 	}
-	else{
-		for (int i=0; i < SV.size()-1; i++){
-        for (int j = i + 1; j < SV.size(); j++){
-            if(SV.at(i)->gethocphi() < SV.at(j)->gethocphi()){
+	else
+	{
+		for (int i=0; i < SV.size()-1; i++)
+		{
+        for (int j = i + 1; j < SV.size(); j++)
+		{
+            if(SV.at(i)->getHocPhi() < SV.at(j)->getHocPhi())
+			{
                 SinhVien *t= SV.at(i);
                 SV.at(i)=SV.at(j);
                 SV.at(j)=t;
@@ -375,79 +489,156 @@ void QuanLySinhVien :: SapXepGiamDan()
 	}
 }
 
-void QuanLySinhVien :: Maxhocphi()
+void QuanLySinhVien :: MaxHocPhi()
 {
-    if(SV.size()==0){
-		cout << "\n\n\t\t\t\t\t********** Danh sach rong **********" << endl;
+    if(SV.size()==0)
+	{
+		cout << "\n\t\t\t\t\t********** Danh sach rong **********" << endl;
 	}
 	else{
 		SinhVien *max = SV.at(0);
-    	for (int i = 1; i < SV.size(); i++){
-        	if (SV.at(i)->gethocphi() > max->gethocphi())
+    	for (int i = 1; i < SV.size(); i++)
+		{
+        	if (SV.at(i)->getHocPhi() > max->getHocPhi())
             	max = SV.at(i);
     	}
-    	cout << endl << "Sinh vien co hoc phi cao nhat: " << endl;
-    	max->xuat();
+    	max->Xuat();
     }
 }
 
-void QuanLySinhVien :: Minhocphi()
+void QuanLySinhVien :: MinHocPhi()
 {
-    if(SV.size()==0){
-		cout << "\n\n\t\t\t\t\t********** Danh sach rong **********" << endl;
+    if(SV.size()==0)
+	{
+		cout << "\n\t\t\t\t\t********** Danh sach rong **********" << endl;
 	}
-	else{
+	else
+	{
 		SinhVien *min = SV.at(0);
-    	for (int i = 1; i < SV.size(); i++){
-       	 	if (SV.at(i)->gethocphi() < min->gethocphi())
+    	for (int i = 1; i < SV.size(); i++)
+		{
+       	 	if (SV.at(i)->getHocPhi() < min->getHocPhi())
            	 	min = SV.at(i);
     	}
-    	cout << endl << "Sinh vien co hoc phi thap nhat: " << endl;
-    	min->xuat();
+    	min->Xuat();
     }
 }
 
-void QuanLySinhVien::Tonghocphi(){
-    float tong = 0;
+void QuanLySinhVien::TongHocPhi()
+{
+    float Tong = 0;
     if(SV.size()==0){
-		cout << "\n\n\t\t\t\t\t********** Danh sach rong **********" << endl;
+		cout << "\n\t\t\t\t\t******** Danh sach rong ********" << endl;
 	}
-	else{
-    	for(int i = 0; i < SV.size(); i++){
-        	tong += SV.at(i)->gethocphi();
+	else
+	{
+    	for(int i = 0; i < SV.size(); i++)
+		{
+        	Tong += SV.at(i)->getHocPhi();
     	}
-    	cout << endl << "Tong hoc phi cua sinh vien trong truong: "<<setprecision(2)<<fixed<<tong<<endl;
+    	cout << endl << "\n\t\t\t\tTong hoc phi cua sinh vien trong truong: "<<setprecision(2)<<fixed<<Tong<<endl;
+    }
+}
+void QuanLySinhVien::TimTen()
+{
+	if(SV.size() == 0)
+	{
+		cout << "\n\t\t\t\t\t******** Danh sach rong ********" << endl;
+	}
+	else
+	{
+		SinhVien *ten = SV.at(0);
+		string timten;
+        cout << "\n\t\t\t\tNhap ten can tim:";
+		fflush(stdin);
+		getline(cin, timten);
+        for(int i=0; i<SV.size(); i++)
+		{
+            if(SV.at(i)->getTen() == timten)
+			{	
+				ten = SV.at(i);	
+		    }
+        }
+	cout << "\n\n\t\t\t\t\tTHONG TIN TEN SINH VIEN CAN TIM"<<endl;		
+    ten->Xuat();	
+    }
+}
+void QuanLySinhVien::TimMaSoSinhVien()
+{
+	if(SV.size() == 0)
+	{
+		cout << "\n\t\t\t\t\t******** Danh sach rong ********" << endl;
+	}
+	else
+	{
+		SinhVien *maso = SV.at(0);
+		string TimMaSo;
+        cout << "\n\t\t\t\tNhap ma so sinh vien can tim:";
+        fflush(stdin);
+		getline(cin, TimMaSo);	 
+       	for(int i=0; i<SV.size(); i++)
+		{
+            if(SV.at(i)->getmssv() == TimMaSo)
+			{		
+                maso = SV.at(i);		
+		    }
+        }
+	cout<<"\n\n\t\t\t\t\tTHONG TIN MA SO SINH VIEN CAN TIM"<<endl;		
+    maso->Xuat();
     }
 }
 
-int main(){
+void QuanLySinhVien::TimSinhVienTheoDiaChi()
+{
+	if(SV.size()==0)
+	{
+		cout << "\n\t\t\t\t\t******** Danh sach rong ********" << endl;
+	}
+	else
+	{
+		SinhVien *diachi = SV.at(0);
+		string TimDiaChi;
+        cout << "\n\t\t\t\tNhap dia chi can tim:";
+        fflush(stdin);
+		getline(cin, TimDiaChi);	 
+		for(int i=0; i<SV.size(); i++)
+		{
+            if(SV.at(i)->getDiaChi() == TimDiaChi)
+			{		
+                diachi = SV.at(i);
+		    }
+        }
+	cout << "\n\n\t\t\t\t\tTHONG TIN DIA CHI CUA SINH VIEN CAN TIM" << endl;		
+    diachi->Xuat();
+    }
+}	
+int main()
+{
     QuanLySinhVien a;
-  	int luachon;
+    int luachon;
     while(69)
     {
-    	system("cls");	//xoa man hinh
-    	printf("\t\t\t\t\t     %c%c   %c%c  %c%c%c%c  %c%c     %c  %c      %c\n", 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219);
-		printf("\t\t\t\t\t    %c  %c %c %c  %c     %c %c    %c  %c      %c\n", 219, 219, 219, 219, 219, 219, 219, 219, 219, 219);
-		printf("\t\t\t\t\t   %c   %c%c  %c  %c     %c  %c   %c  %c      %c\n", 219, 219, 219, 219, 219, 219, 219, 219, 219, 219);
-		printf("\t\t\t\t\t  %c        %c  %c%c%c%c  %c   %c  %c  %c      %c\n", 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219);
-		printf("\t\t\t\t\t %c         %c  %c     %c    %c %c  %c      %c\n", 219, 219, 219, 219, 219, 219, 219, 219);
-		printf("\t\t\t\t\t%c          %c  %c%c%c%c  %c     %c%c   %c%c%c%c%c%c\n",219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219);
-    	cout << "\n\t\t\t\t  1. Nhap danh sach sinh vien";
-    	cout << "\n\t\t\t\t  2. Xuat danh sach sinh vien";
-    	cout << "\n\t\t\t\t  3. Sap xep danh sach sinh vien theo hoc phi tang dan";
-    	cout << "\n\t\t\t\t  4. Sap xep danh sach sinh vien theo hoc phi giam dan";
-    	cout << "\n\t\t\t\t  5. In sinh vien co hoc phi cao nhat";
-    	cout << "\n\t\t\t\t  6. In sinh vien co hoc phi thap nhat";
-    	cout << "\n\t\t\t\t  7. Tim kiem sinh vien theo ten";
-    	cout << "\n\t\t\t\t  8. Tong hoc phi cua sinh vien trong truong";
-    	cout << "\n\t\t\t\t  0. Ket thuc";
-    	cout << "\n\n\t\t\t\t\t  =========== END ============";
-    	
-    	cout << "\nNhap lua chon: ";
+    	system("cls");	//xoa man hinh	 
+    	cout << "\t\t\t\t      ****   ****  *******  ***    **  **     **        "<<endl;
+		cout << "\t\t\t\t      ** ** ** **  **       ****   **  **     **        "<<endl;
+		cout << "\t\t\t\t      **  ***  **  *******  ** **  **  **     **        "<<endl;
+		cout << "\t\t\t\t      **       **  **       **  ** **  **     **        "<<endl;
+		cout << "\t\t\t\t      **       **  *******  **   ****  *********        "<<endl;			 	 	 		 
+    	cout << "\t\t\t\t1. Nhap danh sach sinh vien";
+    	cout << "\n\t\t\t\t2. In danh sach sinh vien";
+    	cout << "\n\t\t\t\t3. Sap xep danh sach sinh vien theo hoc phi tang dan";
+    	cout << "\n\t\t\t\t4. Sap xep danh sach sinh vien theo hoc phi giam dan";
+    	cout << "\n\t\t\t\t5. In sinh vien co hoc phi cao nhat";
+    	cout << "\n\t\t\t\t6. In sinh vien co hoc phi thap nhat";
+    	cout << "\n\t\t\t\t7. Tong hoc phi cua sinh vien trong truong";
+    	cout << "\n\t\t\t\t8. Tim kiem sinh vien";
+    	cout << "\n\t\t\t\t0. Ket thuc";
+    	cout << "\n\t\t\t\n\n\t\t\t\t\t ============ END =============";
+    	cout << "\n\n\t\t\t\tNhap lua chon: ";
     	cin >> luachon;
-    	if (luachon!=0 && luachon !=1 && luachon != 2 && luachon!=3 && luachon!=4 && luachon!=5 && luachon!=6 && luachon!=7 && luachon!=0)
+    	if (luachon!=0 && luachon !=1 && luachon != 2 && luachon!=3 && luachon!=4 && luachon!=5 && luachon!=6 && luachon!=7 && luachon!=8 && luachon!=0)
 		{
-			cout << "\nLua chon khong hop le. Xin kiem tra lai!\n" << endl;
+			cout << "\nLua chon khong hop le. Xin kiem tra lai!" << endl;
 			system("pause");
 		}
 		else if (luachon == 1)
@@ -477,20 +668,55 @@ int main(){
 		else if (luachon == 5)
 		{
 			cout << "\n\n\t\t\t\t============ SINH VIEN CO HOC PHI CAO NHAT ============" << endl;
-			a.Maxhocphi();
+			a.MaxHocPhi();
 			system("pause");
 		}
 		else if (luachon == 6)
 		{
 			cout << "\n\n\t\t\t\t============ SINH VIEN CO HOC PHI THAP NHAT ============" << endl;
-			a.Minhocphi();
+			a.MinHocPhi();
+			system("pause");
+		}
+		else if (luachon == 7)
+		{
+			cout << "\n\n\t\t\t============ TONG HOC PHI CUA SINH VIEN TRONG TRUONG ============" << endl;
+			a.TongHocPhi();
 			system("pause");
 		}
 		else if (luachon == 8)
 		{
-			cout << "\n\n\t\t\t\t=========== TONG HOC PHI CUA SINH VIEN TRONG TRUONG ============" << endl;
-			a.Tonghocphi();
-			system("pause");
+			int luachon1;
+			system("cls");
+			cout << "\n\n\t\t\t\t============ TIM KIEM SINH VIEN  ============" << endl;
+			cout << "\n\t\t\t\t1. Tim kiem sinh vien theo ten";
+    		cout << "\n\t\t\t\t2. Tim kiem sinh vien theo ma so sinh vien";
+    		cout << "\n\t\t\t\t3. Tim kiem sinh vien theo dia chi";
+    		cout << "\n\t\t\t\t0. Quay lai";
+    		cout << "\n\n\t\t\t\tNhap lua chon: ";
+    		cin >> luachon1;
+			if (luachon1 != 0 && luachon1 !=1 && luachon1 != 2 && luachon1 != 3)
+			{
+				cout << "\nLua chon khong hop le. Xin kiem tra lai!" << endl;
+				system("pause");
+			}
+			else if (luachon1 == 1)
+			{
+				cout << "\n\n\t\t\t\t============ TIM SINH VIEN THEO TEN  ============" << endl;
+				a.TimTen();
+				system("pause");
+			}
+			else if (luachon1 == 2)
+			{
+				cout << "\n\n\t\t\t\t============ TIM SINH VIEN THEO MA SO  ============" << endl;
+				a.TimMaSoSinhVien();
+				system("pause");
+			}
+			else if (luachon1 == 3)
+			{
+				cout << "\n\n\t\t\t\t============ TIM SINH VIEN THEO DIA CHI  ============" << endl;
+				a.TimSinhVienTheoDiaChi();
+				system("pause");
+			}
 		}
 		else
 		{
