@@ -1,7 +1,8 @@
 #include <iostream>
-#include <vector>
+#include<string.h>
+#include<vector>
 #include <Windows.h>
-#include <iomanip>
+#include<iomanip>
 using namespace std;
 
 void textcolor(int x)
@@ -13,7 +14,7 @@ void textcolor(int x)
 
 class SinhVien
 {
-	protected:
+protected:
 		string MSSV;
 		string Ho;
 		string TenDem;
@@ -30,6 +31,7 @@ class SinhVien
 		float getHocPhi();
 		string getTen();
 		string getMSSV();
+		string getDiaChi(); 
 		string getNganhHoc();
 };
 SinhVien::SinhVien()
@@ -322,7 +324,10 @@ string SinhVien::getMSSV()
 {
 	return MSSV;
 }
-
+string SinhVien::getDiaChi()
+{
+	return DiaChi;
+}
 //tao class con SinhVienKiThuat ke thua class cha SinhVien
 class SinhVienKiThuat : public SinhVien
 {
@@ -425,6 +430,7 @@ void SinhVienKinhTe::TinhHocPhi()
 	this->HocPhi = this->SoTinChi*275200;
 }
 
+
 class QuanLySinhVien
 {
     private:
@@ -439,6 +445,11 @@ class QuanLySinhVien
         void TongHocPhi();
         void TimTen();
 		void TimMaSoSinhVien();
+		void TimSinhVienTheoDiaChi(); 
+		void Xoa();
+		void XoaSinhVien();
+		void SapXepSinhVienTangDanTheoMssv(); 
+		void SapXepSinhVienTangDanTheoTen();
 };
 
 void QuanLySinhVien :: NhapDS()
@@ -489,6 +500,7 @@ void QuanLySinhVien :: XuatDS()
 		for(int i = 0; i < this -> SV.size(); i++)
 		{
 			textcolor(7);
+			cout<<"\n\t\t\t\t\t Thong tin sinh vien thu "<<i+1<<endl; 
         	this->SV.at(i)->Xuat();
         	cout << endl;
         	textcolor(15);
@@ -593,65 +605,136 @@ void QuanLySinhVien::TongHocPhi()
     	cout << endl << "\n\t\t\t\tTong hoc phi cua sinh vien trong truong: "<<setprecision(2)<<fixed<<Tong<<endl;
     }
 }
-void QuanLySinhVien::TimTen()
-{
-	if(SV.size() == 0)
-	{
-		cout << "\n\t\t\t\t\t******** Danh sach rong ********" << endl;
-	}
-	else
-	{
-		SinhVien *ten;
-		string timten;
-		cout << "\n\t\t\t\tNhap ten sinh vien can tim: ";
-        fflush(stdin);
-		getline(cin, timten);
-		for(int i=0; i < SV.size(); i++)
-		{	
-			if(SV.at(i)->getTen() == timten)
-			{
-				ten = SV.at(i);
-				cout << "\n\n\t\t\t\t\tTHONG TIN TEN SINH VIEN CAN TIM"<<endl;
-				ten->Xuat();
-				break;	
-			}
-			else
-			{
-		    	cout << "\n\t\t\t\tKhong co ten sinh vien trong danh sach can tim. Vui long nhap lai" << endl;
-		    	break;
-			}
-    	}
-	}	
+void QuanLySinhVien::TimTen(){
+	
+		if(SV.size()==0){
+		cout << "\n\n\t\t\t************ Danh sach rong ************" << endl;
+		}
+		else {
+			SinhVien *ten; 
+			string timten;
+            cout<<" nhap ten can tim:";
+			fflush(stdin);
+			getline(cin,timten);
+			 
+            for(int i=0;i<SV.size();i++){
+			
+                if(SV.at(i)->getTen()==timten){	
+				    ten = SV.at(i);	
+            	}
+		   
+		} 
+        cout<<"Thong tin  sinh vien can tim la : "<<endl;		
+        ten->Xuat();
+   }
 }
-void QuanLySinhVien::TimMaSoSinhVien()
+void QuanLySinhVien::TimMaSoSinhVien(){
+		
+		if(SV.size()==0){
+		cout << "\n\n\t\t\t************ Danh sach rong ************" << endl;
+		}
+		else{
+			SinhVien *maso ; 
+			string TimMaSo;
+            cout<<" nhap ma so can tim:";
+            fflush(stdin);
+			getline(cin,TimMaSo);
+			 
+            for(int i=0;i<SV.size();i++){
+			
+                if(SV.at(i)->getMSSV()==TimMaSo){		
+                   maso = SV.at(i);
+            		
+            			
+		        }
+            }
+			cout<<"Thong tin ma so cua sinh vien can tim la "<<endl;		
+        	maso->Xuat();
+        	
+    	}
+	}
+void QuanLySinhVien::TimSinhVienTheoDiaChi(){
+		
+		if(SV.size()==0){
+		cout << "\n\n\t\t\t************ Danh sach rong ************" << endl;
+		}
+		else{
+			SinhVien *diachi ;
+			string TimDiaChi;
+            cout<<" nhap dia chi can tim:";
+            fflush(stdin);
+			getline(cin,TimDiaChi);
+			 
+            for(int i=0;i<SV.size();i++){
+			
+                if(SV.at(i)->getDiaChi()==TimDiaChi){		
+                   diachi = SV.at(i);
+            				
+		        }
+            }
+			cout<<"thong tin dia chi cua sinh vien can tim la "<<endl;		
+        	diachi->Xuat();
+    	}
+	}
+
+
+void QuanLySinhVien::Xoa()
 {
-	if(SV.size() == 0)
+	if(SV.size()==0)
+	{
+		cout << "\n\t\t\t\t\t********** Danh sach rong **********" << endl;
+	}
+	else{		
+  
+ 	int k; 
+ 	int n=SV.size(); 
+	for(int i=k;i<n;i++){
+		SV.at(i)=SV.at(i+1);
+		n--;
+}
+}
+}
+
+void QuanLySinhVien::XoaSinhVien(){
+	if(SV.size()==0)
 	{
 		cout << "\n\t\t\t\t\t******** Danh sach rong ********" << endl;
 	}
 	else
 	{
-		int i;
-		SinhVien *maso;
-		string TimMaSo;
-        cout << "\n\t\t\t\tNhap ma so sinh vien can tim: ";
+		SinhVien *xoa;
+		string ms;
+        cout << "\n\t\t\t\tNhap ms can xoa: ";
         fflush(stdin);
-		getline(cin, TimMaSo);	 
-       	if(SV.at(i)->getMSSV() == TimMaSo)
-		{
-			for(i=0; i<SV.size(); i++)
-			{		
-                maso = SV.at(i);	
-                cout << "\n\n\t\t\t\t\tTHONG TIN TEN SINH VIEN CAN TIM"<<endl;
-    			maso->Xuat();
-				break;		
-			}
+		getline(cin, ms);
+		for(int i=0; i<SV.size()-1; i++){
+		
+		if(SV.at(i)->getMSSV()==ms){
+			xoa=SV.at(i); 
+			Xoa();
+			break; 
 		}
-		else
-		{
-		    cout << "\n\t\t\t\tKhong co ma so sinh vien nay. Vui long nhap lai" << endl;
-		}
+	}
+		xoa->Xuat(); 
+		
+}
+}
+void QuanLySinhVien ::SapXepSinhVienTangDanTheoMssv(){
+	if(SV.size()==0){
+		cout << "\n\n\t\t\t************ Danh sach rong ************" << endl;
+	}
+	else{
+		for (int i=0; i < SV.size()-1; i++){
+        for (int j = i + 1; j < SV.size(); j++){
+            if(SV.at(i)->getMSSV() > SV.at(j)->getMSSV()){
+                SinhVien *t= SV.at(i);
+                SV.at(i)=SV.at(j);
+                SV.at(j)=t;
+            }
+        }
     }
+    XuatDS();
+	}
 }
 
 int main()
@@ -660,34 +743,34 @@ int main()
     int luachon;
     while(69)
     {
-    	system("cls");	 
-    	textcolor(10);
-    	cout << endl;
-    	cout << "\t\t\t\t      ****   ****  *******  ***    **  **     **        " << endl;
-		cout << "\t\t\t\t      ** ** ** **  **       ****   **  **     **        " << endl;
-		cout << "\t\t\t\t      **  ***  **  *******  ** **  **  **     **        " << endl;
-		cout << "\t\t\t\t      **       **  **       **  ** **  **     **        " << endl;
-		cout << "\t\t\t\t      **       **  *******  **   ****  *********        " << endl;
-		textcolor(9);
-		cout << "\t\t\t\t ______________________________________________________" << endl;
-		cout << "\t\t\t\t|\t  ======= QUAN LI SINH VIEN UTC2 =======       |" << endl;
-    	cout << "\t\t\t\t| 1. Nhap, them danh sach sinh vien\t\t       |";
-    	cout << "\n\t\t\t\t| 2. In danh sach sinh vien\t\t\t       |";
-    	cout << "\n\t\t\t\t| 3. Sap xep danh sach sinh vien theo hoc phi tang dan |";
-    	cout << "\n\t\t\t\t| 4. Sap xep danh sach sinh vien theo hoc phi giam dan |";
-    	cout << "\n\t\t\t\t| 5. In sinh vien co hoc phi cao nhat\t\t       |";
-    	cout << "\n\t\t\t\t| 6. In sinh vien co hoc phi thap nhat\t\t       |";
-    	cout << "\n\t\t\t\t| 7. Tong hoc phi cua sinh vien trong truong\t       |";
-    	cout << "\n\t\t\t\t| 8. Tim kiem sinh vien\t\t\t\t       |";
-    	cout << "\n\t\t\t\t| 0. Ket thuc\t\t\t\t\t       |";
-    	cout << "\n\t\t\t\t|\t    ============ END =============\t       |" << endl;
-    	cout << "\t\t\t\t|______________________________________________________|" << endl;
-    	textcolor(15);
+    	system("cls");	//xoa man hinh
+		textcolor(10);
+    	cout << endl;	 
+    	cout << "\t\t\t\t      ****   ****  *******  ***    **  **     **        "<<endl;
+		cout << "\t\t\t\t      ** ** ** **  **       ****   **  **     **        "<<endl;
+		cout << "\t\t\t\t      **  ***  **  *******  ** **  **  **     **        "<<endl;
+		cout << "\t\t\t\t      **       **  **       **  ** **  **     **        "<<endl;
+		cout << "\t\t\t\t      **       **  *******  **   ****  *********        "<<endl;	
+		textcolor(9);		 
+		cout << "\t\t\t\t******************************************************************* ";	 	 		 
+    	cout << "\n\t\t\t\t***       1. Nhap danh sach sinh vien                           *** ";
+    	cout << "\n\t\t\t\t***       2. In danh sach sinh vien                             *** ";
+    	cout << "\n\t\t\t\t***       3. Sap xep danh sach sinh vien theo hoc phi tang dan  *** ";
+    	cout << "\n\t\t\t\t***       4. Sap xep danh sach sinh vien theo hoc phi giam dan  *** ";
+    	cout << "\n\t\t\t\t***       5. In sinh vien co hoc phi cao nhat                   *** ";
+    	cout << "\n\t\t\t\t***       6. In sinh vien co hoc phi thap nhat                  *** ";
+    	cout << "\n\t\t\t\t***       7. Tong hoc phi cua sinh vien trong truong            *** ";
+    	cout << "\n\t\t\t\t***       8. Tim kiem sinh vien                                 *** ";
+    	cout << "\n\t\t\t\t***       9. Xoa sinh vien                                      *** ";
+    	cout << "\n\t\t\t\t***      10. Sap xep sinh vien tang dan theo mssv               *** ";
+    	cout << "\n\t\t\t\t***       0. Ket thuc                                           *** ";
+    	cout << "\n\t\t\t\t***                ============ END =============               *** ";
+    	cout << "\n\t\t\t\t******************************************************************* ";
     	cout << "\n\n\t\t\t\tNhap lua chon: ";
     	cin >> luachon;
-    	if (luachon!=0 && luachon !=1 && luachon != 2 && luachon!=3 && luachon!=4 && luachon!=5 && luachon!=6 && luachon!=7 && luachon!=8 && luachon!=0)
+    	if (luachon!=0 && luachon !=1 && luachon != 2 && luachon!=3 && luachon!=4 && luachon!=5 && luachon!=6 && luachon!=7 && luachon!=8 && luachon!=9 && luachon!=10 && luachon!=0)
 		{
-			cout << "\n\t\t\t\tLua chon khong hop le. Xin kiem tra lai!" << endl;
+			cout << "\nLua chon khong hop le. Xin kiem tra lai!" << endl;
 			system("pause");
 		}
 		else if (luachon == 1)
@@ -716,9 +799,7 @@ int main()
 		}
 		else if (luachon == 4)
 		{
-			textcolor(13);
 			cout << "\n\n\t\t\t============ DANH SACH SINH VIEN DA SAP XEP THEO HOC PHI GIAM DAN ============" << endl;
-			textcolor(15);
 			a.SapXepGiamDan();
 			system("pause");
 		}
@@ -754,14 +835,14 @@ int main()
 			cout << "\n\n\t\t\t\t============ TIM KIEM SINH VIEN  ============" << endl;
 			cout << "\n\t\t\t\t1. Tim kiem sinh vien theo ten";
     		cout << "\n\t\t\t\t2. Tim kiem sinh vien theo ma so sinh vien";
-
+    		cout << "\n\t\t\t\t3. Tim kiem sinh vien theo dia chi";
     		cout << "\n\t\t\t\t0. Quay lai";
     		textcolor(15);
     		cout << "\n\n\t\t\t\tNhap lua chon: ";
     		cin >> luachon1;
 			if (luachon1 != 0 && luachon1 !=1 && luachon1 != 2 && luachon1 != 3)
 			{
-				cout << "\n\t\t\t\tLua chon khong hop le. Xin kiem tra lai!" << endl;
+				cout << "\nLua chon khong hop le. Xin kiem tra lai!" << endl;
 				system("pause");
 			}
 			else if (luachon1 == 1)
@@ -780,8 +861,32 @@ int main()
 				a.TimMaSoSinhVien();
 				system("pause");
 			}
+			else if (luachon1 == 3)
+			{
+				textcolor(13);
+				cout << "\n\n\t\t\t\t============ TIM SINH VIEN THEO DIA CHI  ============" << endl;
+				textcolor(15);
+				a.TimSinhVienTheoDiaChi();
+				system("pause");
+			}
 		}
-		else if (luachon==0)
+		else if (luachon == 9)
+		{
+			textcolor(13);
+			cout << "\n\n\t\t\t\t============ THONG TIN SINH VIEN DA XOA LA  ============" << endl;
+			textcolor(15);
+			a.XoaSinhVien(); 
+			system("pause");
+		}
+		else if (luachon == 10)
+		{
+			textcolor(13);
+			cout << "\n\n\t\t\t\t============ THONG TIN SINH VIEN DA SAP XEP TANG DAN THEO MSSV LA  ============" << endl;
+			textcolor(15);
+			a.SapXepSinhVienTangDanTheoMssv(); 
+			system("pause");
+		}
+		else
 		{
 			break;
 		}
