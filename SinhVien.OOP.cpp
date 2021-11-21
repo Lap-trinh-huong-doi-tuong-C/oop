@@ -327,6 +327,8 @@ void NgaySinh::Xuat()
 class SinhVien : public HoTen, public NgaySinh
 {
 	protected:
+		string NganhHoc;
+		int SoTinChi;
 		int Khoa;
 		string MSSV;
 		string DiaChi;
@@ -343,8 +345,8 @@ class SinhVien : public HoTen, public NgaySinh
 
 SinhVien::SinhVien()
 {
-	MSSV = DiaChi = "";
-	HocPhi = 0;
+	NganhHoc = MSSV = DiaChi = "";
+	SoTinChi = HocPhi = 0;
 }
 
 SinhVien::~SinhVien()
@@ -354,25 +356,32 @@ SinhVien::~SinhVien()
 void SinhVien::Nhap()
 {
 	textcolor(15);
+	cout << "\t\t\t\tNhap nganh hoc cua sinh vien: ";
+	fflush(stdin);
+	getline(cin, NganhHoc);
 	cout << "\t\t\t\tNhap khoa: ";
 	cin >> Khoa;
 	cout << "\t\t\t\tNhap ma so sinh vien: ";
-	cin.ignore(256, '\n');
+	fflush(stdin);
 	getline(cin, MSSV);
 	HoTen::Nhap();
 	NgaySinh::Nhap();
 	cout << "\t\t\t\tNhap dia chi sinh vien: ";
 	fflush(stdin);
 	getline(cin, DiaChi);
+	cout << "\t\t\t\tNhap so tin chi: ";
+	cin >> SoTinChi;
 }
 
 void SinhVien::Xuat()
 {
+	cout << "\t\t\t\tNganh: " << NganhHoc << endl;
 	cout << "\t\t\t\tKhoa: " << Khoa << endl;
 	cout << "\t\t\t\tMa so sinh vien: " << MSSV << endl;
 	HoTen::Xuat();
 	NgaySinh::Xuat();
 	cout << "\t\t\t\tDia chi : "<< DiaChi << endl;
+	cout << "\t\t\t\tSo tin chi: "<<SoTinChi << endl;
 }
 
 float SinhVien::getHocPhi()
@@ -388,42 +397,20 @@ string SinhVien::getMSSV()
 //tao class con SinhVienKiThuat ke thua class cha SinhVien
 class SinhVienKiThuat:public SinhVien
 {
-	private:
-		string NganhHoc;
-		int SoTinChi;
 	public:
-		SinhVienKiThuat();
-		~SinhVienKiThuat();
 		void Nhap();
 		void Xuat();
 		void TinhHocPhi();
 };
 
-SinhVienKiThuat::SinhVienKiThuat()
-{
-	NganhHoc = "";
-	SoTinChi = 0;
-} 
-
-SinhVienKiThuat::~SinhVienKiThuat()
-{
-}
-
 void SinhVienKiThuat::Nhap()
 {
-	cout << "\t\t\t\tNhap nganh hoc cua sinh vien: ";
-	fflush(stdin);
-	getline(cin, NganhHoc);
 	SinhVien::Nhap();
-	cout << "\t\t\t\tNhap so tin chi: ";
-	cin >> SoTinChi;
 }
 
 void SinhVienKiThuat::Xuat()
 {
-	cout << "\t\t\t\tNganh: " << NganhHoc << endl;
 	SinhVien::Xuat();
-	cout << "\t\t\t\tSo tin chi: "<<SoTinChi << endl;
 	this->TinhHocPhi();
 	cout << "\t\t\t\tHoc phi: " << HocPhi << " vnd" << endl;
 	cout << "\t\t\t\t_______________________________________________"  << endl; 
@@ -437,41 +424,20 @@ void SinhVienKiThuat::TinhHocPhi()
 //tao class con SinhVienKinhTe ke thua class cha SinhVien
 class SinhVienKinhTe : public SinhVien
 {	
-	private:
-		string NganhHoc;
-		int SoTinChi;
 	public:
-		SinhVienKinhTe();
-		~SinhVienKinhTe();
 		void Nhap();
 		void Xuat();
 		void TinhHocPhi();
 };
 
-SinhVienKinhTe::SinhVienKinhTe():SinhVien()
-{
-	NganhHoc = "";
-	SoTinChi = 0;
-} 
-SinhVienKinhTe::~SinhVienKinhTe()
-{
-}
-
 void SinhVienKinhTe::Nhap()
 {
-	cout << "\t\t\t\tNhap nganh hoc cua sinh vien: ";
-	fflush(stdin);
-	getline(cin, NganhHoc);
 	SinhVien::Nhap();
-	cout << "\t\t\t\tNhap so tin chi: ";
-	cin >> SoTinChi;
 }
 
 void SinhVienKinhTe::Xuat()
 {
-	cout << "\t\t\t\tNganh: " << NganhHoc << endl;
 	SinhVien::Xuat();
-	cout << "\t\t\t\tSo tin chi: "<<SoTinChi << endl;
 	this->TinhHocPhi();
 	cout << "\t\t\t\tHoc phi: " << HocPhi << " vnd" << endl;
 	cout << "\t\t\t\t_______________________________________________"  << endl; 
@@ -569,7 +535,6 @@ void QuanLySinhVien::XoaSinhVienTheoMSSV()
 	else
 	{
 		string Xoa;
-		int kt = 0;
 		cout << "\n\t\t\t\tNhap ma so sinh vien can xoa : ";
 		fflush(stdin);
 		getline(cin, Xoa);
@@ -777,7 +742,7 @@ int main()
 {
     QuanLySinhVien a;
     int luachon;
-    while (69)
+    while (true)
     {
     	system("cls");	//xoa man hinh
 		textcolor(10);
@@ -802,7 +767,7 @@ int main()
     	cout << "\n\t\t\t\t************************************************************** ";
     	cout << "\n\n\t\t\t\tNhap lua chon: ";
     	cin >> luachon;
-    	if (luachon!=0 && luachon !=1 && luachon != 2 && luachon!=3 && luachon!=4 && luachon!=5 && luachon!=6 && luachon!=7 && luachon!=8 && luachon!=9 && luachon!=10 && luachon!=0)
+    	if (luachon!=0 && luachon !=1 && luachon != 2 && luachon!=3 && luachon!=4 && luachon!=5 && luachon!=6 && luachon!=7 && luachon!=8 && luachon!=9 && luachon!=10)
 		{
 			cout << "\nLua chon khong hop le. Xin kiem tra lai!" << endl;
 			system("pause");
@@ -838,7 +803,7 @@ int main()
     			textcolor(15);
     			cout << "\n\n\t\t\t\tNhap lua chon: ";
     			cin >> luachon0;
-				if (luachon0 != 0 && luachon0 !=1 && luachon0 != 2)
+				if (luachon0 != 0 && luachon0 != 1 && luachon0 != 2)
 				{
 					cout << "\n\t\t\t\tLua chon khong hop le. Xin kiem tra lai!" << endl;
 					system("pause");
