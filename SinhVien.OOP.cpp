@@ -3,6 +3,7 @@
 #include<vector>
 #include<Windows.h>
 #include<iomanip>
+#include<fstream>
 using namespace std;
 
 void textcolor(int x)
@@ -23,6 +24,8 @@ class HoTen
 		~HoTen();
 		void Nhap();
 		void Xuat();
+		string getHo();
+		string getTenDem();
 		string getTen();
 };
 
@@ -53,6 +56,16 @@ void HoTen::Xuat()
 	cout << "\t\t\t\tHo ten sinh vien: "<< Ho << " " << TenDem << " " << Ten << endl;
 }
 
+string HoTen::getHo()
+{
+	return Ho;
+}
+
+string HoTen::getTenDem()
+{
+	return TenDem;
+}
+
 string HoTen::getTen()
 {
 	return Ten;
@@ -67,6 +80,9 @@ class NgaySinh
 		~NgaySinh();
 		void Nhap();
 		void Xuat();
+		int getNgay();
+		int getThang();
+		int getNam();
 };
 
 NgaySinh::NgaySinh()
@@ -324,6 +340,21 @@ void NgaySinh::Xuat()
 	cout << "\t\t\t\tNgay/thang/nam sinh: "<< Ngay << "/" << Thang << "/" << Nam << endl;
 }
 
+int NgaySinh::getNgay()
+{
+	return Ngay;
+}
+
+int NgaySinh::getThang()
+{
+	return Thang;
+}
+
+int NgaySinh::getNam()
+{
+	return Nam;
+}
+
 class SinhVien : public HoTen, public NgaySinh
 {
 	protected:
@@ -339,8 +370,12 @@ class SinhVien : public HoTen, public NgaySinh
 		virtual void Nhap();
 		virtual void Xuat();
 		virtual void TinhHocPhi() = 0;
-		float getHocPhi();
 		string getMSSV();
+		int getSoTinChi();
+		string getNganhHoc();
+		int getKhoa();
+		string getDiaChi();
+		long long getHocPhi();
 };
 
 SinhVien::SinhVien()
@@ -384,7 +419,22 @@ void SinhVien::Xuat()
 	cout << "\t\t\t\tSo tin chi: "<<SoTinChi << endl;
 }
 
-float SinhVien::getHocPhi()
+string SinhVien::getNganhHoc()
+{
+	return NganhHoc;
+}
+
+string SinhVien::getDiaChi()
+{
+	return DiaChi;
+}
+
+int SinhVien::getKhoa()
+{
+	return Khoa;
+}
+
+long long SinhVien::getHocPhi()
 {
 	return HocPhi;
 }
@@ -392,6 +442,11 @@ float SinhVien::getHocPhi()
 string SinhVien::getMSSV()
 {
 	return MSSV;
+}
+
+int SinhVien::getSoTinChi()
+{
+	return SoTinChi;
 }
 
 //tao class con SinhVienKiThuat ke thua class cha SinhVien
@@ -467,6 +522,7 @@ class QuanLySinhVien
 		void TimMaSoSinhVien();
 		void TimSinhVienTheoDiaChi();
 		void SapXepTangDanTheoMSSV();
+		void GhiFile();
 };
 
 void QuanLySinhVien::NhapDS()
@@ -573,7 +629,7 @@ void QuanLySinhVien :: SapXepTangDanTheoMSSV()
 {
 	if (SV.size() == 0)
 	{
-		cout << "\n\n\t\t\t\t\t************ Danh sach rong ************" << endl;
+		cout << "\n\t\t\t\t\t************ Danh sach rong ************" << endl;
 	}
 	else{
 		for (int i = 0; i < SV.size()-1; i++){
@@ -592,7 +648,7 @@ void QuanLySinhVien :: SapXepTangDanTheoMSSV()
 void QuanLySinhVien :: SapXepTangDanTheoHocPhi()
 {
 	if (SV.size() == 0){
-		cout << "\n\n\t\t\t\t\t  ********** Danh sach rong *********" << endl;
+		cout << "\n\t\t\t\t\t  ********** Danh sach rong *********" << endl;
 	}
 	else
 	{
@@ -616,7 +672,7 @@ void QuanLySinhVien :: SapXepGiamDanTheoHocPhi()
 {
 	if (SV.size()==0)
 	{
-		cout << "\n\n\t\t\t\t\t  ********** Danh sach rong **********" << endl;
+		cout << "\n\t\t\t\t\t  ********** Danh sach rong **********" << endl;
 	}
 	else
 	{
@@ -692,7 +748,7 @@ void QuanLySinhVien::TimMaSoSinhVien()
 		
 	if (SV.size() == 0)
 	{
-		cout << "\n\n\t\t\t\t\t******** Danh sach rong ********" << endl;
+		cout << "\n\t\t\t\t\t******** Danh sach rong ********" << endl;
 	}
 	else if (SV.size() != 0)
 	{
@@ -717,7 +773,7 @@ void QuanLySinhVien :: TimTen()
 {
 	if (SV.size() == 0)
 	{
-		cout << "\n\n\t\t\t\t\t******** Danh sach rong ********" << endl;
+		cout << "\n\t\t\t\t\t******** Danh sach rong ********" << endl;
 	}
 	else if (SV.size() != 0)
 	{
@@ -736,6 +792,26 @@ void QuanLySinhVien :: TimTen()
             }
         }
    	}
+}
+
+void QuanLySinhVien::GhiFile()
+{
+	if (SV.size() == 0)
+	{
+		cout << "\n\t\t\t\t\t******** Danh sach rong ********" << endl;
+	}
+	else
+	{
+		ofstream file("QuanLySinhVien.txt");
+		file << setw(90) << "\t\t\t*********** DANH SACH SINH VIEN ***********" << endl;
+		file << "    " << left << setw(0) << setw(8) << "STT" << setw(40) << "        Nganh" << setw(12) << "Khoa" << setw(18) << "    MSSV" << setw(23) << "     Ho ten" << setw(6) << setw(10) << setw(25) << "Ngay/thang/nam sinh" << setw(2) << setw(4) << setw(20) << "   Dia chi" << setw(16) << "So tin chi" << setw(15) << "   Hoc phi" << endl;
+		for (int i = 0; i < SV.size(); i++)
+		{
+			file << "    " << left << " " << setw(8) << i + 1 << setw(40) << SV.at(i)->getNganhHoc() << setw(12) << SV.at(i)->getKhoa() << setw(18) << SV.at(i)->getMSSV() << setw(7) << SV.at(i)->getHo() << setw(6) << SV.at(i)->getTenDem() << setw(10) << SV.at(i)->getTen() << setw(0) << "   " << setw(2) << SV.at(i)->getNgay() << setw(0) << "/" << setw(2) << SV.at(i)->getThang() << setw(0) << "/" << setw(17) << SV.at(i)->getNam() << setw(22) << SV.at(i)->getDiaChi() << setw(15) << SV.at(i)->getSoTinChi() << setw(15) << SV.at(i)->getHocPhi() << endl;
+		}
+		file.close();
+		cout << "\n\t\t\t\tIn thanh cong!" << endl;
+	}
 }
 
 int main()
@@ -762,12 +838,14 @@ int main()
     	cout << "\n\t\t\t\t**     6. In sinh vien co hoc phi thap nhat                 ** ";
     	cout << "\n\t\t\t\t**     7. Tong hoc phi cua sinh vien trong truong           ** ";
     	cout << "\n\t\t\t\t**     8. Tim kiem sinh vien                                ** ";
+    	cout << "\n\t\t\t\t**     9. Ghi danh sach sinh vien ra file                   ** ";
     	cout << "\n\t\t\t\t**     0. Ket thuc                                          ** ";
     	cout << "\n\t\t\t\t**              ============ END =============              ** ";
     	cout << "\n\t\t\t\t************************************************************** ";
+    	textcolor(15);
     	cout << "\n\n\t\t\t\tNhap lua chon: ";
     	cin >> luachon;
-    	if (luachon!=0 && luachon !=1 && luachon != 2 && luachon!=3 && luachon!=4 && luachon!=5 && luachon!=6 && luachon!=7 && luachon!=8 && luachon!=9 && luachon!=10)
+    	if (luachon!=0 && luachon !=1 && luachon != 2 && luachon!=3 && luachon!=4 && luachon!=5 && luachon!=6 && luachon!=7 && luachon!=8 && luachon!=9)
 		{
 			cout << "\nLua chon khong hop le. Xin kiem tra lai!" << endl;
 			system("pause");
@@ -946,6 +1024,14 @@ int main()
 					break;
 				}
 			}
+		}
+		else if (luachon == 9)
+		{
+			textcolor(13);
+			cout << "\n\n\t\t\t\t   ============ IN SINH VIEN RA FILE ============" << endl;
+			textcolor(15);
+			a.GhiFile();
+			system("pause");
 		}
 		else
 		{
